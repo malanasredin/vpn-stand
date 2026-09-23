@@ -1,0 +1,10 @@
+services:
+  vpn:
+    build: .
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "51820:51820/udp"
+    volumes:
+      - ./wg0.conf:/etc/wireguard/wg0.conf:ro
+    restart: unless-stopped

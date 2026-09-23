@@ -1,0 +1,3 @@
+wg0.conf
+*.key
+vpn-secret.yaml

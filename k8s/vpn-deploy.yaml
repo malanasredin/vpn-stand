@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpn-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpn
+  template:
+    metadata:
+      labels:
+        app: vpn
+    spec:
+      containers:
+      - name: vpn
+        image: vpn-stand-vpn:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        ports:
+        - containerPort: 51820
+          protocol: UDP
+          hostPort: 51820
+        volumeMounts:
+        - name: wg-vol
+          mountPath: /etc/wireguard
+      volumes:
+      - name: wg-vol
+        secret:
+          secretName: wg-secret
