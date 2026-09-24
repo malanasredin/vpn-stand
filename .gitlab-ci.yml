@@ -1,0 +1,17 @@
+stages:
+  - build
+  - test
+
+build-image:
+  stage: build
+  tags:
+    - vm
+  script:
+    - docker build -t vpn-stand:ci .
+
+test-image:
+  stage: test
+  tags:
+    - vm
+  script:
+    - docker run --rm vpn-stand:ci wg --version
