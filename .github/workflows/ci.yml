@@ -9,3 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: docker build -t vpn-stand:ci .
       - run: docker run --rm vpn-stand:ci wg --version
+      - run: docker save vpn-stand:ci -o /tmp/vpn-ci.tar
+      - run: sudo -n k3s ctr images import /tmp/vpn-ci.tar
+      - run: sudo -n k3s kubectl apply -f k8s/vpn-deploy.yaml
+      - run: sudo -n k3s kubectl rollout restart deployment/vpn-deploy

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: vpn
-        image: vpn-stand-vpn:latest
+        image: vpn-stand-vpn:ci
         imagePullPolicy: IfNotPresent
         securityContext:
           capabilities:
