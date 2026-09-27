@@ -4,6 +4,8 @@ metadata:
   name: vpn-deploy
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: vpn
